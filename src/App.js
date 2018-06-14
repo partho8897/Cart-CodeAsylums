@@ -18,21 +18,15 @@ export default class App extends Component {
         this.setState({
           clickedData : result
         });
-//        this.showData(result);
-        /*Object.keys(this.state.clickedData).forEach(key => {
-          console.log(this.state.clickedData[key]);
-        })*/
       })
-   
-      
-     
   };
   
-  /*showData = result => {
-    for(let i in )
-  }*/
-  
-  
+  addToCart = mrp => {
+    this.setState({
+      totalItems: this.state.totalItems+1,
+      totalPrice: this.state.totalPrice+mrp
+    });
+  }
   
   render() {
 
@@ -204,12 +198,14 @@ export default class App extends Component {
            <div> {data.title} </div>
            <div> MRP: {data.mrp}</div>
            <div> Product Ratings: {data.sellerAverageRating}</div>
+           <button onClick={(e) => this.addToCart(data.mrp)} type="button">Add To Cart</button>
           </span>
        
         );
         })
       }
-     
+     Total Cost = {this.state.totalPrice}
+     Total Items = {this.state.totalItems}
     
     </div>
     </div>
