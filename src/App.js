@@ -190,20 +190,22 @@ export default class App extends Component {
         const data = this.state.clickedData[index]
         var image = data.imageUrlStr.split(';')
         return( 
-          <span>
+          <div className="product">
            <div> <img src={image[0]} alt={data.title} /></div>
            <div> {data.title} </div>
            <div> MRP: {data.mrp}</div>
            <div> Product Ratings: {data.sellerAverageRating}</div>
            <button onClick={(e) => this.addToCart(data.mrp)} type="button">Add To Cart</button>
-          </span>
+          </div>
        
         );
         })
       }
      Total Cost = {this.state.totalPrice}
      Total Items = {this.state.totalItems}
-    
+     {localStorage.setItem('myItem',this.state.totalItems)}
+     {localStorage.setItem('myPrice',this.state.totalPrice)}
+     {console.log(localStorage.getItem('myItem'),localStorage.getItem('myPrice'))} 
     </div>
     </div>
     </div>

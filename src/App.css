@@ -2,3 +2,7 @@
     display: flex;
     flex-wrap: wrap;
 }
+.product{
+    height: 8%;
+    width: 25%;
+}
