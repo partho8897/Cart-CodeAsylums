@@ -3,11 +3,12 @@ import "./App.css";
 
 export default class App extends Component {
   state = {
-    totalPrice : 0,
-    totalItems : 0,
+    totalPrice : 0 || localStorage.getItem("myPrice"),
+    totalItems : 0 || localStorage.getItem("myItem"),
     adressUser : '',
     nameUser : '',
-    clickedData : []
+    clickedData : [],
+    dict : []
   };
 
   getData = link => {
@@ -19,16 +20,37 @@ export default class App extends Component {
           clickedData : result
         });
       })
+    /*var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4 && xhttp.status === 200) {
+       console.log(xhttp.responseText);
+       
+    }
+    this.setState({
+      clickedData : xhttp.responseText
+    });
+  };
+    xhttp.open("GET", link, true);
+    xhttp.send();*/
   };
   
   addToCart = mrp => {
     this.setState({
-      totalItems: this.state.totalItems+1,
-      totalPrice: this.state.totalPrice+mrp
+      totalItems: +this.state.totalItems + +1,
+      totalPrice: +this.state.totalPrice + +mrp,
     });
+    /*this.setState({
+      dict: {
+       key: this.state.totalItems,
+       value: this.state.totalPrice
+     }
+    })*/
   }
   
   render() {
+    localStorage.setItem('myItem',this.state.totalItems);
+    localStorage.setItem('myPrice',this.state.totalPrice);
+    console.log(localStorage.getItem("myItem"), localStorage.getItem("myPrice")); 
 
     return (
       <div className = 'container'>
@@ -203,9 +225,7 @@ export default class App extends Component {
       }
      Total Cost = {this.state.totalPrice}
      Total Items = {this.state.totalItems}
-     {localStorage.setItem('myItem',this.state.totalItems)}
-     {localStorage.setItem('myPrice',this.state.totalPrice)}
-     {console.log(localStorage.getItem('myItem'),localStorage.getItem('myPrice'))} 
+     
     </div>
     </div>
     </div>
