@@ -3,8 +3,8 @@ import "./App.css";
 
 export default class App extends Component {
   state = {
-    totalPrice : 0,
-    totalItems : 0,
+    totalPrice : 0 || localStorage.getItem('myPrice'),
+    totalItems : 0 || localStorage.getItem('myItem'),
     adressUser : '',
     nameUser : '',
     clickedData : []
@@ -23,11 +23,11 @@ export default class App extends Component {
   
   addToCart = mrp => {
     this.setState({
-      totalItems: this.state.totalItems+1,
-      totalPrice: this.state.totalPrice+mrp
+      totalItems: + this.state.totalItems+ +1,
+      totalPrice: + this.state.totalPrice+ +mrp
     });
-  }
-  
+}
+
   render() {
 
     return (
@@ -189,28 +189,37 @@ export default class App extends Component {
         Object.keys(this.state.clickedData).map(index => {
         const data = this.state.clickedData[index]
         var image = data.imageUrlStr.split(';')
+       
+
+        var a = this.state.totalItems;
+        var b = this.state.totalPrice;
+        localStorage.setItem('myItem',a);
+        localStorage.setItem('myPrice',b);
+
+        let x = localStorage.getItem('myItem') ;
+        let y = localStorage.getItem('myPrice') ;
+        console.log(x,y);
         return( 
-          <span>
+          <div className="product">
            <div> <img src={image[0]} alt={data.title} /></div>
            <div> {data.title} </div>
            <div> MRP: {data.mrp}</div>
            <div> Product Ratings: {data.sellerAverageRating}</div>
            <button onClick={(e) => this.addToCart(data.mrp)} type="button">Add To Cart</button>
-          </span>
+          </div>
        
         );
         })
       }
      Total Cost = {this.state.totalPrice}
      Total Items = {this.state.totalItems}
+    </div>
+    </div>
+    </div>
     
-    </div>
-    </div>
-    </div>
 
-    
+      
     );
   }
 }
-
 
