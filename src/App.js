@@ -18,21 +18,15 @@ export default class App extends Component {
         this.setState({
           clickedData : result
         });
-//        this.showData(result);
-        /*Object.keys(this.state.clickedData).forEach(key => {
-          console.log(this.state.clickedData[key]);
-        })*/
       })
-   
-      
-     
   };
   
-  /*showData = result => {
-    for(let i in )
-  }*/
-  
-  
+  addToCart = mrp => {
+    this.setState({
+      totalItems: this.state.totalItems+1,
+      totalPrice: this.state.totalPrice+mrp
+    });
+  }
   
   render() {
 
@@ -45,7 +39,7 @@ export default class App extends Component {
         <span className="sr-only">Toggle Dropdown</span>
       </button>
       <div className="dropdown-menu">
-        <a className="dropdown-item"  onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_BabyFood_BabyCereals&count=100&offset=0')}>Baby Cereals</a>
+      <a className="dropdown-item"  onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_BabyFood_BabyCereals&count=100&offset=0')}>Baby Cereals</a>
         <a className="dropdown-item"  onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_BabyFood_BabySnackPuffs&count=100&offset=0')}>Baby Snack Puffs</a>
         <a className="dropdown-item"  onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_BabyFood_InfantFormula&count=100&offset=0')}>Infant Formula</a>
         <a className="dropdown-item"  onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_BabyFood_Vitamins-Supplements&count=100&offset=0')}>Vitamins Supplements</a>
@@ -96,7 +90,6 @@ export default class App extends Component {
         
         </div>
       </div>
-
       <div className="btn-group">
       <button type="button" className="btn btn-danger">Confectionary Sweets</button>
       <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,7 +102,6 @@ export default class App extends Component {
         <a className="dropdown-item" onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_Confectioneries-Sweets_Sweets-Mithai_IndianSweet&count=100&offset=0')}>Indian Sweets</a>
         </div>
       </div>
-
       <div className="btn-group">
       <button type="button" className="btn btn-danger">Dairy Products</button>
       <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -187,7 +179,7 @@ export default class App extends Component {
        <a className="dropdown-item" onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_Spices,Condiments-Sauces_Pickles-Chutneys_Pickle&count=100&offset=0')}>Pickle</a>
        <a className="dropdown-item" onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_Spices,Condiments-Sauces_Salt&count=100&offset=0')}>Salt</a>
        <a className="dropdown-item" onClick = {() => this.getData('http://101.53.137.41/api/?cat=Food-Nutrition_Spices,Condiments-Sauces_Spices-Masala&count=100&offset=0')}>Masala</a>
-     </div>
+
      </div>
      </div>
       </div>
@@ -203,13 +195,16 @@ export default class App extends Component {
            <div> {data.title} </div>
            <div> MRP: {data.mrp}</div>
            <div> Product Ratings: {data.sellerAverageRating}</div>
+           <button onClick={(e) => this.addToCart(data.mrp)} type="button">Add To Cart</button>
           </span>
        
         );
         })
       }
-     
+     Total Cost = {this.state.totalPrice}
+     Total Items = {this.state.totalItems}
     
+    </div>
     </div>
     </div>
 
