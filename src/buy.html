@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="import" href="./App.js">
+        <div><h1>BUY PAGE</h1></div>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="name" placeholder="Enter your name"><br>
+            <input type="text" id="address" placeholder="Enter your address"><br>
+            <input type="number" id="phonenumber" placeholder="Enter your Phone Number"><br>
+            <button type="button" onclick="test()">Submit</button>
+        </form>
+    </body>
+    <script>
+        function test()
+        {
+            console.log(this.state.totalPrice)
+        }
+    </script>
+</html>

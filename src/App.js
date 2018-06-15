@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import "./App.css";
+import { browserHistory } from 'react-router';
 
 export default class App extends Component {
+
+
+
  state = {
  totalPrice : 0 || (localStorage.getItem("myPrice")!==NaN ? localStorage.getItem("myPrice") : 0),
  totalItems : 0 || (localStorage.getItem("myPrice")!==NaN ? localStorage.getItem("myItem") : 0),
@@ -21,11 +25,16 @@ export default class App extends Component {
  })
  };
  
- addToCart = mrp => {
+ addToCart = (data) => {
  this.setState({
  totalItems:  + this.state.totalItems+ +1,
- totalPrice:  + this.state.totalPrice+ +mrp
+ totalPrice:  + this.state.totalPrice+ +data.mrp
  });
+ localStorage.setItem("itemsInCart",localStorage.getItem("itemsInCart")+"~"+JSON.stringify(data))
+ let val = localStorage.getItem("itemsInCart").split('~')
+ Object.keys(val).map(index => {
+    return(console.log(JSON.parse(val[index])));
+ })
 }
 
  render() {
@@ -189,22 +198,20 @@ export default class App extends Component {
  Object.keys(this.state.clickedData).map(index => {
  const data = this.state.clickedData[index]
  var image = data.imageUrlStr.split(';')
- 
- localStorage.setItem
 
- localStorage.setItem('myItem',this.state.totalItems);
+ /*localStorage.setItem('myItem',this.state.totalItems);
  localStorage.setItem('myPrice',this.state.totalPrice);
 
  let x = localStorage.getItem('myItem') ;
  let y = localStorage.getItem('myPrice') ;
- console.log(x,y);
+ console.log(x,y);*/
  return( 
  <div className="product">
  <div> <img src={image[0]} alt={data.title} /></div>
  <div> {data.title} </div>
  <div> MRP: {data.mrp}</div>
  <div> Product Ratings: {data.sellerAverageRating}</div>
- <button onClick={(e) => this.addToCart(data.mrp)} type="button">Add To Cart</button>
+ <button onClick={(e) => this.addToCart(data)} type="button">Add To Cart</button>
  </div>
  
  );
@@ -212,6 +219,7 @@ export default class App extends Component {
  }
  Total Cost = {this.state.totalPrice}
  Total Items = {this.state.totalItems}
+ 
  </div>
  </div>
  </div>
