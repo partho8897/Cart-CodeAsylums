@@ -3,8 +3,8 @@ import "./App.css";
 
 export default class App extends Component {
   state = {
-    totalPrice : 0 || localStorage.getItem('myPrice'),
-    totalItems : 0 || localStorage.getItem('myItem'),
+    totalPrice : 0 ,
+    totalItems : 0 ,
     adressUser : '',
     nameUser : '',
     clickedData : []
@@ -23,8 +23,8 @@ export default class App extends Component {
   
   addToCart = mrp => {
     this.setState({
-      totalItems: + this.state.totalItems+ +1,
-      totalPrice: + this.state.totalPrice+ +mrp
+      totalItems: + localStorage.getItem('myItem') + this.state.totalItems+ +1,
+      totalPrice: + localStorage.getItem('myPrice') + this.state.totalPrice+ +mrp
     });
 }
 
@@ -189,12 +189,9 @@ export default class App extends Component {
         Object.keys(this.state.clickedData).map(index => {
         const data = this.state.clickedData[index]
         var image = data.imageUrlStr.split(';')
-       
-
-        var a = this.state.totalItems;
-        var b = this.state.totalPrice;
-        localStorage.setItem('myItem',a);
-        localStorage.setItem('myPrice',b);
+  
+        localStorage.setItem('myItem',this.state.totalItems);
+        localStorage.setItem('myPrice',this.state.totalPrice);
 
         let x = localStorage.getItem('myItem') ;
         let y = localStorage.getItem('myPrice') ;
